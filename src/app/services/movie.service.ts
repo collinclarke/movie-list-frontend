@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,15 @@ export class MovieService {
 
 
   findMovie(title: string): Observable<OMDBMovie> {
-    return this.http.get<OMDBMovie>(`${this.omdbUrl}?t=${title}&apikey=${environment.omdb_api_key}`);
+    return this.http.get<OMDBMovie>(`${this.omdbUrl}?t=${title}&apikey=${environment.omdb_api_key}`).pipe(
+      map((res: any) => {
+        if (res.Error) {
+          throw new Error(res.Error);
+        } else {
+          return res;
+        }
+      })
+    );
   }
 
   getMovies(): Observable<Movie[]> {

@@ -14,7 +14,7 @@
     <h4>{{movie.Year}}</h4>
     <p>{{movie.Plot}}</p>    
   </article>
-  <form (ngSubmit)="prepareAndSubmitMovie()">
+  <form *ngIf="movie" (ngSubmit)="prepareAndSubmitMovie()">
     <div [ngClass]="{'error': true, 'hidden': !error}">
       {{errors.save}}
     </div>
@@ -24,4 +24,9 @@
     <input name="rating" type="number" [(ngModel)]="rating">
     <button type="Submit">Save Movie</button>
   </form>
+  <article class="review" *ngIf="review">
+    <h3>{{review.title}}</h3>
+    <h3>{{review.rating}}</h3>
+    <p>{{review.comment}}</p>
+  </article>
 </section>

@@ -13,6 +13,7 @@ export class MovieLookupComponent implements OnInit {
   rating: number;
   comment: string;
   movie: OMDBMovie;
+  review: Movie;
 
   errors = {
     save: '',
@@ -40,6 +41,7 @@ export class MovieLookupComponent implements OnInit {
       take(1)
     ).subscribe(res => {
       this.movie = res;
+      this.errors.search = '';
       console.log(this.movie);
     }, error => {
       this.errors.search = 'No Movie Found for that Title';
@@ -61,7 +63,7 @@ export class MovieLookupComponent implements OnInit {
     this.movieService.addMovie(movie).pipe(
       take(1)
     ).subscribe(res => {
-      console.log(res);
+      this.review = res;
     }, error => {
       console.error(error);
     });
