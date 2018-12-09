@@ -2,6 +2,7 @@ import { ApiService } from './../api/api.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,35 +17,43 @@ export class MovieService {
   ) { }
 
 
-  findMovie(title: string): Observable<Movie> {
-    return this.http.get<Movie>(`${this.omdbUrl}?t=${title}`);
+  findMovie(title: string): Observable<OMDBMovie> {
+    return this.http.get<OMDBMovie>(`${this.omdbUrl}?t=${title}&apikey=${environment.omdb_api_key}`);
   }
 
-  getMovies() {
+  getMovies(): Observable<Movie[]> {
     return this.api.get('/movies');
   }
 
-  getMovie(id: string) {
+  getMovie(id: string): Observable<Movie> {
     return this.api.get('/movies/' + id);
   }
 
-  addMovie(movie: Movie) {
+  addMovie(movie: Movie): Observable<Movie> {
     return this.api.post('/movies', movie);
   }
 
-  updateMovie(movie: Movie) {
+  updateMovie(movie: Movie): Observable<Movie> {
     return this.api.patch('/movies/' + movie.id, movie);
   }
 
-  deleteMovie(id: string) {
+  deleteMovie(id: string): Observable<Movie> {
     return this.api.delete('/movies/' + id);
   }
 
 
 }
 
+export interface OMDBMovie {
+  Poster?: string;
+  Year: string;
+  Title: string;
+  Plot: string;
+}
+
 export interface Movie {
   comment: string;
   rating: number;
   title: string;
+  id?: string;
 }

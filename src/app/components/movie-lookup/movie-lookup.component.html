@@ -1,8 +1,27 @@
-<form (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmitSearch()">
   <div [ngClass]="{'error': true, 'hidden': !error}">
-    {{error}}
+    {{errors.search}}
   </div>
   <label for="title">Search by Title</label>
   <input name="title" type="text" [(ngModel)]="title">
-  <button type="submit">Submit</button>
+  <button type="submit">Search</button>
 </form>
+
+<section class="results">
+  <article *ngIf="movie">
+    <img [src]="movie.Poster" [alt]="'Poster for' + movie.Title">
+    <h2>{{movie.Title}}</h2>
+    <h4>{{movie.Year}}</h4>
+    <p>{{movie.Plot}}</p>    
+  </article>
+  <form (ngSubmit)="prepareAndSubmitMovie()">
+    <div [ngClass]="{'error': true, 'hidden': !error}">
+      {{errors.save}}
+    </div>
+    <label for="comment">Add a Comment</label>
+    <input name="comment" type="text" [(ngModel)]="comment">
+    <label for="rating">Add a Rating</label>
+    <input name="rating" type="number" [(ngModel)]="rating">
+    <button type="Submit">Save Movie</button>
+  </form>
+</section>

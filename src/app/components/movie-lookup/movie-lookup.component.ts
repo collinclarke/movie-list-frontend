@@ -1,4 +1,4 @@
-import { MovieService, Movie } from './../../services/movie.service';
+import { MovieService, OMDBMovie, Movie } from './../../services/movie.service';
 import { Component, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
 
@@ -10,10 +10,14 @@ import { take } from 'rxjs/operators';
 export class MovieLookupComponent implements OnInit {
 
   title: string;
-  movie: Movie;
+  rating: number;
+  comment: string;
+  movie: OMDBMovie;
 
-  submitted = false;
-  error: string;
+  errors = {
+    save: '',
+    search: ''
+  };
 
   constructor(
     private movieService: MovieService
@@ -22,13 +26,12 @@ export class MovieLookupComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit() {
-    this.submitted = true;
+  onSubmitSearch() {
     this.title = this.title.trim();
     if (!!this.title) {
       this.searchMoviesByTitle();
     } else {
-      this.error = 'Please Input A Title';
+      this.errors.search = 'Please Input A Title';
     }
   }
 
@@ -37,8 +40,30 @@ export class MovieLookupComponent implements OnInit {
       take(1)
     ).subscribe(res => {
       this.movie = res;
+      console.log(this.movie);
     }, error => {
-      this.error = 'No Movie Found for that Title';
+      this.errors.search = 'No Movie Found for that Title';
+    });
+  }
+
+  prepareAndSubmitMovie() {
+    const { rating, comment, movie } = this;
+    const { Title } = movie;
+    const favMovie: Movie = {
+      rating,
+      comment,
+      title: Title
+    };
+    this.submitMovie(favMovie);
+  }
+
+  private submitMovie(movie: Movie) {
+    this.movieService.addMovie(movie).pipe(
+      take(1)
+    ).subscribe(res => {
+      console.log(res);
+    }, error => {
+      console.error(error);
     });
   }
 
