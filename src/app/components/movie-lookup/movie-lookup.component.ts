@@ -26,6 +26,7 @@ export class MovieLookupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // TODO add route reader here to check queryparams for movie title and search
   }
 
   onSubmitSearch() {
