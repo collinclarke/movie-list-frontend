@@ -1,0 +1,8 @@
+<form (ngSubmit)="onSubmit()">
+  <div [ngClass]="{'error': true, 'hidden': !error}">
+    {{error}}
+  </div>
+  <label for="title">Search by Title</label>
+  <input name="title" type="text" [(ngModel)]="title">
+  <button type="submit">Submit</button>
+</form>
