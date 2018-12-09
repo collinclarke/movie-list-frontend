@@ -13,6 +13,8 @@ export class MovieCardComponent implements OnChanges {
   newReview: Movie;
   edit: boolean;
 
+  // For future, move movie review form to it's own component and validate/sanitize input
+
   constructor(
     private movieService: MovieService
   ) { }
