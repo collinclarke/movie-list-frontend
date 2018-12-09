@@ -1,0 +1,33 @@
+.poster {
+  min-height: 400px;
+  min-width: 300px;
+  background-color: #f2f2f2;
+  margin: 0 auto 1rem auto;
+}
+
+form {
+  margin-bottom: 2rem;
+}
+
+.movie {
+  display: flex;
+  flex-flow: row wrap;
+  @media(min-width: 768px) {
+    flex-flow: row nowrap;
+    .details {
+      padding-left: 2rem;
+    }
+  }
+}
+
+.details {
+  margin-bottom: 1rem;
+}
+
+label, input {
+  margin-right: .5rem;
+}
+
+header {
+  margin-bottom: .5rem;
+}

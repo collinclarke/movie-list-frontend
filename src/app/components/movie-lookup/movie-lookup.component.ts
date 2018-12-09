@@ -28,7 +28,7 @@ export class MovieLookupComponent implements OnInit {
   }
 
   onSubmitSearch() {
-    this.title = this.title.trim();
+    if (this.title) this.title = this.title.trim();
     if (!!this.title) {
       this.searchMoviesByTitle();
     } else {
@@ -41,6 +41,7 @@ export class MovieLookupComponent implements OnInit {
       take(1)
     ).subscribe(res => {
       this.movie = res;
+      this.review = null;
       this.errors.search = '';
       console.log(this.movie);
     }, error => {

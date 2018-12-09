@@ -2,32 +2,42 @@
   <ng-container *ngIf="edit; else show">
     <form (ngSubmit)="updateMovie()">
       <h2 class="title">
-        <span class="label">Title:</span>{{movie.title}}
+        {{movie.title}}
       </h2>
-      <label class="rating">
-        <span class="label">Current Rating: {{movie.rating}}</span>
+      <div class="form-group rating">
+        <label for="rating">
+          <span class="label">Rating:</span>
+        </label>
         <input name="rating" type="number" [(ngModel)]="newReview.rating">
-      </label>
-      <label class="comment">
-        <span class="label">Current Comment: {{movie.comment}}</span>
-        <input name="comment" type="string" [(ngModel)]="newReview.comment">       
-      </label>
-      <button type="submit">Update</button>
-      <button type="button" (click)="edit=false">Cancel</button>
-      <button type="button" (click)="deleteMovie()">Delete Review</button>
+      </div>
+      <div class="form-group comment">
+        <label for="rating">
+          <span class="label">Comment:</span>
+        </label>
+        <input name="comment" type="string" [(ngModel)]="newReview.comment">
+      </div>
+      <div class="actions edit">
+        <button type="button" (click)="deleteMovie()">Delete Review</button>
+        <button type="submit" (click)="updateMovie()">Save</button>        
+      </div>
     </form>
   </ng-container>
   <ng-template #show>
-    <small>{{movie.id}}</small>
-    <h2 class="title">
-      <span class="label">Title:</span>{{movie.title}}
-    </h2>
-    <h3 class="rating">
-      <span class="label">Rating:</span><span>{{movie.rating}}</span>
-    </h3>
-    <p class="comment">
-      <span class="label">Comment:</span><span>{{movie.comment}}</span>
-    </p>
-    <button type="button" (click)="edit=true">Edit</button>
+    <div class="details">
+      <h2 class="title">
+        <span class="label">Title:</span>{{movie.title}}
+      </h2>
+      <h3 class="rating">
+        <span class="label">Rating:</span>
+        <span>{{movie.rating}}</span>
+      </h3>
+      <p class="comment">
+        <span class="label">Comment:</span>
+        <span>{{movie.comment}}</span>
+      </p>
+      <div class="actions">
+        <button class="align-right" type="button" (click)="edit=true">Edit</button>
+      </div>
+    </div>
   </ng-template>
 </article>

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { Movie, MovieService } from '../../services/movie.service';
 import { take } from 'rxjs/operators';
 
@@ -9,6 +9,7 @@ import { take } from 'rxjs/operators';
 })
 export class MovieCardComponent implements OnChanges {
   @Input() movie: Movie;
+  @Output() deleted = new EventEmitter<boolean>();
   newReview: Movie;
   edit: boolean;
 
@@ -17,7 +18,7 @@ export class MovieCardComponent implements OnChanges {
   ) { }
 
   ngOnChanges() {
-    this.newReview = Object.assign({}, this.movie);
+    this.newReview = Object.assign({}, this.movie);    
   }
 
   updateMovie() {
@@ -30,12 +31,13 @@ export class MovieCardComponent implements OnChanges {
   }
 
   deleteMovie() {
+    confirm('Are you sure you want to delete this review?');
     this.movieService.deleteMovie(this.movie.id).pipe(
       take(1)
     ).subscribe(res => {
-      alert('Review Deleted');
       this.edit = false;
       this.movie = null;
+      this.deleted.next(true);
     });
   }
 

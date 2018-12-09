@@ -1,0 +1,28 @@
+main {
+  display: flex;
+}
+
+.content-holder {
+  margin: 0 auto;
+  width: 95vw;
+  max-width: 50rem;
+}
+
+header {
+  padding: 1.5rem 1rem;
+  background: #f9f9f9;
+  margin-bottom: 2rem;
+}
+
+nav {
+  ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-flow: row wrap;
+    li {
+      margin-right: .75rem;
+      font-size: 1.25rem;
+    }
+  }
+}

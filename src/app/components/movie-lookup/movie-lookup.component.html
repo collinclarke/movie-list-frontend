@@ -7,27 +7,37 @@
       {{errors.search}}
     </div>
     <label for="title">Search by Title</label>
-    <input name="title" type="text" [(ngModel)]="title">
-    <button type="submit">Search</button>
+    <div class="form-group">
+      <input name="title" type="text" [(ngModel)]="title">
+      <button type="submit">Search</button>
+    </div>
   </form>
 
   <section class="results">
-    <article *ngIf="movie">
-      <img [src]="movie.Poster" [alt]="'Poster for' + movie.Title">
-      <h2>{{movie.Title}}</h2>
-      <h4>{{movie.Year}}</h4>
-      <p>{{movie.Plot}}</p>
+    <article class="movie" *ngIf="movie">
+      <img class="poster" [src]="movie.Poster" [alt]="'Poster for ' + movie.Title">
+      <div class="details">
+        <h2>{{movie.Title}}</h2>
+        <h4>{{movie.Year}}</h4>
+        <p>{{movie.Plot}}</p>
+      </div>
     </article>
-    <form *ngIf="movie" (ngSubmit)="prepareAndSubmitMovie()">
+    <form *ngIf="movie && !review" (ngSubmit)="prepareAndSubmitMovie()">
       <div [ngClass]="{'error': true, 'hidden': !error}">
         {{errors.save}}
       </div>
-      <label for="comment">Add a Comment</label>
-      <input name="comment" type="text" [(ngModel)]="comment">
-      <label for="rating">Add a Rating</label>
-      <input name="rating" type="number" [(ngModel)]="rating">
-      <button type="Submit">Save Movie</button>
+      <div class="form-group">
+        <label for="comment">Add a Comment</label>
+        <input name="comment" type="text" [(ngModel)]="comment">
+      </div>
+      <div class="form-group">
+        <label for="rating">Add a Rating</label>
+        <input name="rating" type="number" [(ngModel)]="rating">
+      </div>
+      <div class="form-group">
+        <button class="align-right" type="Submit" *ngIf="rating || comment">Save Review</button>
+      </div>
     </form>
-    <app-movie-card *ngIf="review" [movie]="review"></app-movie-card>
+    <app-movie-card *ngIf="review" (deleted)="review = null" [movie]="review"></app-movie-card>
   </section>
 </section>
