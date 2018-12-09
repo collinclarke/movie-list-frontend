@@ -26,3 +26,14 @@ nav {
     }
   }
 }
+
+a, a:visited {
+  color: gray;
+  text-decoration: none;
+  cursor: pointer;
+  &.active {
+    color: blue;
+    cursor: unset;
+  }
+}
+
