@@ -1,0 +1,23 @@
+.movie-card {
+  border: 1px solid black;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  padding: .5rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  .comment, .rating, .title {
+    font-size: 2em;
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 0;
+    padding: 0 1rem;
+  }
+  .label {
+    font-weight: lighter;
+    font-size: .25em;
+    text-transform: uppercase;
+    padding-right: .5em;
+  }
+}

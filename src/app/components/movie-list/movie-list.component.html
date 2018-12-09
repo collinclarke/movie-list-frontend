@@ -1,0 +1,9 @@
+<section class="movie-index">
+  <header>
+    <h2>All Reviews</h2>
+  </header>
+  <div class="movie-holder">
+    <app-movie-card *ngFor="let movie of movies" [movie]="movie">
+    </app-movie-card>
+  </div>
+</section>
