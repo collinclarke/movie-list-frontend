@@ -30,6 +30,18 @@ export class MovieService {
     );
   }
 
+  findMovieByTitle(title: string): Observable<Movie> {
+    return this.api.get('/movies/find_by_title/' + title).pipe(
+      map((res: any) => {
+        if (res.Error) {
+          throw new Error(res.Error);
+        } else {
+          return res;
+        }
+      })
+    );
+  }
+
   getMovies(): Observable<Movie[]> {
     return this.api.get('/movies');
   }

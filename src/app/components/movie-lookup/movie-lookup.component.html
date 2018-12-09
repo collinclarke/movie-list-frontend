@@ -35,7 +35,7 @@
         <input name="rating" type="number" [(ngModel)]="rating">
       </div>
       <div class="form-group">
-        <button class="align-right" type="Submit" *ngIf="rating || comment">Save Review</button>
+        <button class="align-right" type="Submit" *ngIf="rating || comment" [disabled]="submitting">Save Review</button>
       </div>
     </form>
     <app-movie-card *ngIf="review" (deleted)="review = null" [movie]="review"></app-movie-card>

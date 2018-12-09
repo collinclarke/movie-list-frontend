@@ -15,6 +15,7 @@ export class MovieLookupComponent implements OnInit {
   movie: OMDBMovie;
   review: Movie;
 
+  submitting: boolean;
   errors = {
     save: '',
     search: ''
@@ -43,13 +44,24 @@ export class MovieLookupComponent implements OnInit {
       this.movie = res;
       this.review = null;
       this.errors.search = '';
-      console.log(this.movie);
+      this.searchReviewByTitle(res.Title);
     }, error => {
       this.errors.search = 'No Movie Found for that Title';
     });
   }
 
+  searchReviewByTitle(title: string) {
+    this.movieService.findMovieByTitle(title).pipe(
+      take(1),
+    ).subscribe(res => {
+      this.review = res;
+    }, error => {
+      this.review = null;
+    });
+  }
+
   prepareAndSubmitMovie() {
+    this.submitting = true;
     const { rating, comment, movie } = this;
     const { Title } = movie;
     const favMovie: Movie = {
