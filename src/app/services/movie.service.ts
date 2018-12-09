@@ -60,6 +60,8 @@ export interface OMDBMovie {
   Plot: string;
 }
 
+// TODO rename movie-review
+
 export interface Movie {
   comment: string;
   rating: number;
