@@ -3,7 +3,7 @@
     <h2>Search and Review</h2>
   </header>
   <form (ngSubmit)="onSubmitSearch()">
-    <div [ngClass]="{'error': true, 'hidden': !error}">
+    <div [ngClass]="{'error': true, 'hidden': !errors}">
       {{errors.search}}
     </div>
     <label for="title">Search by Title</label>
@@ -23,7 +23,7 @@
       </div>
     </article>
     <form *ngIf="movie && !review" (ngSubmit)="prepareAndSubmitMovie()">
-      <div [ngClass]="{'error': true, 'hidden': !error}">
+      <div [ngClass]="{'error': true, 'hidden': !errors}">
         {{errors.save}}
       </div>
       <div class="form-group">
