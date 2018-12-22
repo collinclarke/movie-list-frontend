@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "deploy": "npm run build-gh && npm run deploy-gh",
+    "build-gh": "ng build --prod --base-href 'https://collinclarke.github.io/movie-list-frontend/'",
+    "deploy-gh": "ngh --dir=dist/movie-list-frontend/",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",

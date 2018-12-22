@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 })
 export class MovieService {
 
-  omdbUrl = 'http://www.omdbapi.com/';
+  omdbUrl = 'https://www.omdbapi.com/';
 
   constructor(
     private api: ApiService,
